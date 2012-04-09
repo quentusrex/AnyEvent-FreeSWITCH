@@ -1,51 +1,103 @@
-AnyEvent-FreeSWITCH
+package AnyEvent::FreeSWITCH;
 
-The README is used to introduce the module and provide instructions on
-how to install the module, any machine dependencies it may have (for
-example C compilers and installed libraries) and any other information
-that should be provided before the module is installed.
+use 5.006;
+use strict;
+use warnings;
 
-A README file is required for CPAN modules since CPAN extracts the README
-file from a module distribution so that people browsing the archive
-can use it to get an idea of the module's uses. It is usually a good idea
-to provide version information here so that people can decide whether
-fixes for the module are worth downloading.
+=head1 NAME
+
+AnyEvent::FreeSWITCH - The great new AnyEvent::FreeSWITCH!
+
+=head1 VERSION
+
+Version 0.01
+
+=cut
+
+our $VERSION = '0.01';
 
 
-INSTALLATION
+=head1 SYNOPSIS
 
-To install this module, run the following commands:
+Quick summary of what the module does.
 
-	perl Makefile.PL
-	make
-	make test
-	make install
+Perhaps a little code snippet.
 
-SUPPORT AND DOCUMENTATION
+    use AnyEvent::FreeSWITCH;
 
-After installing, you can find documentation for this module with the
-perldoc command.
+    my $foo = AnyEvent::FreeSWITCH->new();
+    ...
+
+=head1 EXPORT
+
+A list of functions that can be exported.  You can delete this section
+if you don't export anything, such as for a purely object-oriented module.
+
+=head1 SUBROUTINES/METHODS
+
+=head2 function1
+
+=cut
+
+sub function1 {
+}
+
+=head2 function2
+
+=cut
+
+sub function2 {
+}
+
+=head1 AUTHOR
+
+William King, C<< <william.king at quentustech.com> >>
+
+=head1 BUGS
+
+Please report any bugs or feature requests to C<bug-anyevent-freeswitch at rt.cpan.org>, or through
+the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=AnyEvent-FreeSWITCH>.  I will be notified, and then you'll
+automatically be notified of progress on your bug as I make changes.
+
+
+
+
+=head1 SUPPORT
+
+You can find documentation for this module with the perldoc command.
 
     perldoc AnyEvent::FreeSWITCH
 
+
 You can also look for information at:
 
-    RT, CPAN's request tracker (report bugs here)
-        http://rt.cpan.org/NoAuth/Bugs.html?Dist=AnyEvent-FreeSWITCH
+=over 4
 
-    AnnoCPAN, Annotated CPAN documentation
-        http://annocpan.org/dist/AnyEvent-FreeSWITCH
+=item * RT: CPAN's request tracker (report bugs here)
 
-    CPAN Ratings
-        http://cpanratings.perl.org/d/AnyEvent-FreeSWITCH
+L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=AnyEvent-FreeSWITCH>
 
-    Search CPAN
-        http://search.cpan.org/dist/AnyEvent-FreeSWITCH/
+=item * AnnoCPAN: Annotated CPAN documentation
+
+L<http://annocpan.org/dist/AnyEvent-FreeSWITCH>
+
+=item * CPAN Ratings
+
+L<http://cpanratings.perl.org/d/AnyEvent-FreeSWITCH>
+
+=item * Search CPAN
+
+L<http://search.cpan.org/dist/AnyEvent-FreeSWITCH/>
+
+=back
 
 
-LICENSE AND COPYRIGHT
+=head1 ACKNOWLEDGEMENTS
 
-Copyright (C) 2012 William King
+
+=head1 LICENSE AND COPYRIGHT
+
+Copyright 2012 William King.
 
 This program is distributed under the (Revised) BSD License:
 L<http://www.opensource.org/licenses/bsd-license.php>
@@ -78,3 +130,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+
+=cut
+
+1; # End of AnyEvent::FreeSWITCH
