@@ -1,0 +1,3 @@
+1. Add tests for existing functions
+2. Add tests for if FS is installed and started
+   a. Make sure the tests respect ENV variables for the ESL connections

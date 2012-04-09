@@ -13,9 +13,13 @@ WriteMakefile(
       : ()),
     PL_FILES            => {},
     PREREQ_PM => {
-        'Test::More' => 0,
-	'ESL'        => 0,
+        'Test::More'    => 0,
+	'ESL'           => 0,
+	'AnyEvent'      => 0,
+	'Object::Event' => 0.7,
+	'Carp'          => 0,
     },
+    PREREQ_FATAL        => 1,
     dist                => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean               => { FILES => 'AnyEvent-FreeSWITCH-*' },
 );

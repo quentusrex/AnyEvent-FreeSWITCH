@@ -1,8 +1,14 @@
 package AnyEvent::FreeSWITCH;
 
 use 5.006;
+use AnyEvent;
+use Object::Event;
+use ESL;
+use Carp;
 use strict;
 use warnings;
+
+our @ISA = qw/Object::Event/;
 
 =head1 NAME
 
@@ -28,25 +34,65 @@ Perhaps a little code snippet.
     my $foo = AnyEvent::FreeSWITCH->new();
     ...
 
-=head1 EXPORT
-
-A list of functions that can be exported.  You can delete this section
-if you don't export anything, such as for a purely object-oriented module.
-
 =head1 SUBROUTINES/METHODS
 
-=head2 function1
+=head2 new
 
 =cut
 
-sub function1 {
+sub new {
+    my ($this, %args) = @_;    
+    my $class = ref($this) || $this;
+    my $self = bless(\%args, $class);
+    
+    $self->{host}     ||= '127.0.0.1';
+    $self->{port}     ||= '8021';
+    $self->{password} ||= 'ClueCon';
+    
+    return $self;
 }
 
-=head2 function2
+=head2 connect
 
 =cut
 
-sub function2 {
+sub connect {
+    my $self = shift;
+
+    $self->{esl} = new ESL::ESLconnection(
+	$self->{host},
+	$self->{port},
+	$self->{password},
+	);
+    
+}
+
+=head2 is_connected
+
+=cut
+
+sub is_connected {
+    my $self = shift;
+
+    return $self->{esl}->connected();
+}
+
+=head2 api
+
+=cut
+
+sub api {
+    my $self = shift;
+    my $command = shift;
+    my $args = shift;
+    
+    if ( not $self->is_connected() ) {
+	$self->event('connection_error', "Error trying to run api command: $command $args");
+	return undef;
+    }
+    
+    my $e = $self->{esl}->api($command, $args);
+    return $e->getBody();
 }
 
 =head1 AUTHOR
