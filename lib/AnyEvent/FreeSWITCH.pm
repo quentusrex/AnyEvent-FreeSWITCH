@@ -48,6 +48,7 @@ sub new {
     $self->{host}     ||= '127.0.0.1';
     $self->{port}     ||= '8021';
     $self->{password} ||= 'ClueCon';
+    $self->{events}   ||= 'all';
     
     return $self;
 }
@@ -58,13 +59,40 @@ sub new {
 
 sub connect {
     my $self = shift;
-
+    
     $self->{esl} = new ESL::ESLconnection(
 	$self->{host},
 	$self->{port},
 	$self->{password},
 	);
+    if ( $self->is_connected() ) {
+	$self->event('connected');
+	$self->{io} = AnyEvent->io(
+	    fh => $self->{esl}->socketDescriptor(),
+	    poll => "r",
+	    cb => sub { $self->recv_events(); },
+	    );
+    } else {
+	$self->event('error_connection');
+    }
     
+    $self->{esl}->events('plain', $self->{events});
+
+}
+
+=head2 recv_events
+
+=cut
+
+sub recv_events {
+    my $self = shift;
+
+    my $e = $self->{esl}->recvEventTimed(0);
+
+    if( defined $e ) {
+	$self->event('recv_event', $e->getType(), $e->serialize('json'));
+	$self->event('event_'. $e->getType(), $e->serialize('json'));
+    } 
 }
 
 =head2 is_connected

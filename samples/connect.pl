@@ -1,11 +1,20 @@
 use AnyEvent::FreeSWITCH;
 
+my $j = AnyEvent->condvar;
+
 my $fs = AnyEvent::FreeSWITCH->new();
 
-$fs->reg_cb('test', sub {print "Called a test\n";});
-$fs->event('test');
+$fs->reg_cb(
+    'connected'=>  sub {
+	print "Connected\n";
+	print $fs->api("status");
+    },    
+    'recv_event' => sub { 
+	my ($self, $type, $event) = @_;
+	print "type: $type \n";
+	print "event: $event \n";
+    });
 
 $fs->connect();
 
-print "is connected: " . $fs->is_connected() . "\n";
-print $fs->api("status");
+$j->wait;
